@@ -144,7 +144,7 @@ public class MainActivity extends Activity {
             runOnUiThread(() -> {
                 Intent i;
                 switch(action) {
-                    case "phone": i=new Intent(Intent.ACTION_DIAL, Uri.parse("tel:")); break;
+                    case "phone": i=new Intent(MainActivity.this, DialerActivity.class); break;
                     case "messages": i=new Intent(Intent.ACTION_SENDTO, Uri.parse("smsto:")); break;
                     case "browser": i=new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.google.com/")); break;
                     case "maps": i=new Intent(Intent.ACTION_VIEW, Uri.parse("geo:0,0?q=")); break;
