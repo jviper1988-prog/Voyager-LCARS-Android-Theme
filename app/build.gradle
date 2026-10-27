@@ -1,0 +1,15 @@
+plugins { id 'com.android.application' }
+
+android {
+    namespace 'com.voyager.lcars'
+    compileSdk 35
+
+    defaultConfig {
+        applicationId 'com.voyager.lcars'
+        minSdk 28
+        targetSdk 34
+        versionCode 4
+        versionName '1.2.1'
+    }
+    compileOptions { sourceCompatibility JavaVersion.VERSION_17; targetCompatibility JavaVersion.VERSION_17 }
+}
