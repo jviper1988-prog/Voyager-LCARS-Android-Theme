@@ -23,6 +23,7 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Toast;
+import android.view.inputmethod.InputMethodManager;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -47,6 +48,7 @@ public class MainActivity extends Activity {
         getWindow().setNavigationBarColor(0xff000000);
         web = new WebView(this);
         web.setBackgroundColor(0xff000000);
+        web.setFocusableInTouchMode(true);
         WebSettings settings = web.getSettings();
         settings.setJavaScriptEnabled(true);
         settings.setDomStorageEnabled(true);
@@ -93,6 +95,18 @@ public class MainActivity extends Activity {
     }
 
     public final class DeviceBridge {
+        @JavascriptInterface public void showKeyboard() {
+            runOnUiThread(() -> {
+                if (web == null) return;
+                web.requestFocus();
+                web.postDelayed(() -> {
+                    if (web == null || !web.hasWindowFocus()) return;
+                    InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+                    if (imm != null) imm.showSoftInput(web, InputMethodManager.SHOW_IMPLICIT);
+                }, 120);
+            });
+        }
+
         @JavascriptInterface public String listApps() {
             JSONArray out = new JSONArray();
             try {
@@ -217,6 +231,11 @@ public class MainActivity extends Activity {
     @Override protected void onResume() {
         super.onResume();
         if (web != null) web.evaluateJavascript("window.LCARS&&window.LCARS.resume()", null);
+    }
+
+    @Override protected void onPause() {
+        if (web != null) web.evaluateJavascript("window.LCARS&&window.LCARS.pause()", null);
+        super.onPause();
     }
 
     @Override protected void onDestroy() {
