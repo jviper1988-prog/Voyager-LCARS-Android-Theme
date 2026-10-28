@@ -1,20 +1,24 @@
-# Voyager LCARS v1.2.3
+# Ember Citadel — Android launcher prototype 0.1.0
 
-Fan-made, AI-assisted Android launcher and artwork for personal testing. Not an official Samsung system theme.
+Original dark fantasy direction; working name pending name/trademark review. Separate app ID `com.jakebrowne.embercitadel`, so it can coexist with Voyager LCARS. This is a native Android launcher, not a web page. It is an early prototype, not a finished paid theme.
 
-This update addresses first-phone feedback: calculator input now has a built-in keypad and Open Keyboard button. The three user-supplied MP3 files replace synthesized sounds. Red Alert uses its own looping audio and mute control; touch audio remains a separate setting.
+## Implemented
+- Installed applications from the current Android profile, live app launching, searchable drawer.
+- Up to 12 persistent favorites; hold an app to pin/unpin/reorder or inspect App info.
+- Home role selection, clock/date/battery, original fortress artwork and geometric crest.
+- Optional ember tint on locally installed app icons.
+- Phone, Messages, Camera and Web handoffs; themed number pad with editable number, delete, clear, and hold-0 plus sign.
+- Norse Bold headings inspired by the angular lettering on Jake's Dragonborn Brewing Co. labels. Small controls use Android sans-serif for readability.
 
-See CHANGES_v1_2_2.md for changes, audio provenance, and installation/update notes. The v1.2.1 APK compiled and passed Android lint; the user confirmed installation. The v1.2.3 phone fixes require retesting on the S24 Ultra.
+The number pad hands off to the installed Phone app to confirm/place the call. It does not replace the in-call screen, contacts, emergency dialer or call history. Launcher styling does not change Samsung Keyboard, lock screen, AOD, Settings or notification panel.
 
-## Preview and tests
-Open preview/Voyager_LCARS_Interactive_v1_2_2.html with its neighboring audio folder intact. Native app shortcuts and sensors require the APK. Run `node tests/ui-logic.cjs` for simulated UI checks.
+## Try it
+Download and extract the successful workflow's **Ember-Citadel-debug-APK** artifact. Transfer app-debug.apk to the phone and install. Open Ember Citadel, then Settings → Set as default Home. Open Apps and hold applications to pin them. To return to Samsung Home, use Android Settings → Apps → Choose default apps → Home app (wording may vary).
 
-## APK
-Use the latest successful Build Voyager LCARS APK run under this repository's Actions tab. Download the Voyager-LCARS-installable-debug-APK artifact and extract app-debug.apk. Builds are debug-signed for personal testing; they are not production releases.
+Debug signing is temporary; later builds may require uninstall/reinstall and reset favorites. Do not publish this debug APK as a paid product.
 
-Export logs before replacing an installed version. A fresh build can use a different debug certificate, requiring uninstall/reinstall; see the change notes. Choose One UI Home in default Home app settings before uninstalling.
+## Build
+Java 17, Android SDK 35/build-tools 35.0.0, Gradle 8.11.1. Run `python scripts/fetch_font.py`, then `gradle :app:testDebugUnitTest :app:assembleDebug :app:lintDebug`. The font fetch verifies the original archive checksum. The font is deliberately excluded from source redistribution; the designer license explicitly permits application embedding.
 
-No device operation is guaranteed by compilation or simulated tests. Artwork, preview screenshots, and the included historical test notes are separate from phone evidence.
-
-## LCARS dialer
-COMMUNICATIONS opens a native LCARS number pad. Enter a number, then Continue to Phone; your existing phone app confirms and places the call. No automatic calling, contacts access, call history access, or default-phone replacement is implemented. Hold 0 for +; Delete/Clear edit the number. Rotation preserves the entered number. Physical-phone testing is still required.
+## Evidence and remaining work
+See [device checklist](docs/DEVICE_CHECKLIST.md) and [asset sources](docs/ASSET_SOURCES.md). Compiling and automated tests are not proof of Samsung device behavior. No claim of sales, performance improvement or release readiness.
